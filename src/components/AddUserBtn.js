@@ -1,24 +1,23 @@
 "use client"
-import { Button } from "./ui/button"
+import { addNewUserActions } from "@/actions/actions"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "@/components/ui/dialog"
-import { Label } from "./ui/label"
-import { Input } from "./ui/input"
 import { NewUserFormControls, UserInitialState } from "@/utils"
-import { useState } from "react"
-import { addNewUserActions } from "@/actions/actions"
-import { set } from "mongoose"
+import { useContext, useState } from "react"
+import { Button } from "./ui/button"
+import { Input } from "./ui/input"
+import { Label } from "./ui/label"
+import { UserContext } from "@/context/userContext"
 
 const AddUserBtn = () => {
   const formContols = []
-  const [newUserFormData, setNewUserFormData] = useState(UserInitialState)
+  const { newUserFormData, setNewUserFormData } = useContext(UserContext)
   
 
   const handleSubmit = async() => {
@@ -31,7 +30,9 @@ const AddUserBtn = () => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>Add user</Button>
+          <Button onClick={()=>{
+            setNewUserFormData(UserInitialState)
+          }}>Add user</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
